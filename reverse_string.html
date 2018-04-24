@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Reverse a String</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  </head>
+  <body>
+    <div class="jumbotron">
+        <h1>Reverse a String</h1>
+    </div>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col">
+          <p class="wrappable">Reverse the provided string.</p>
+          <p class="wrappable">You may need to turn the string into an array before you can reverse it.</p>
+          <p class="wrappable">Your result must be a string.</p>
+          <p class="wrappable">Remember to use <a href="//forum.freecodecamp.org/t/how-to-get-help-when-you-are-stuck/19514" target="_blank">Read-Search-Ask</a> if you get stuck. Write your own code.</p>
+        </div>
+        <div class="col">
+          <div class="form-group">
+            <label for="inputText">Enter Text</label>
+            <input type="text" class="form-control" name="Input" value="" id="inputText">
+          </div>
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <p id="outputText"></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script
+			  src="http://code.jquery.com/jquery-3.3.1.min.js"
+			  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+			  crossorigin="anonymous"></script>
+    <script type="text/javascript">
+      function reverseString(str) {
+        console.log(str);
+        var newStr = str.split("").reverse().join("");
+        return newStr;
+      }
+
+      $(document).ready(function(){
+
+        $('#inputText').val("");
+
+        $('#inputText').on('input',function(e){
+          let txt = $('#inputText').val();
+          $('#outputText').text(reverseString(txt));
+        });
+      });
+    </script>
+  </body>
+</html>
