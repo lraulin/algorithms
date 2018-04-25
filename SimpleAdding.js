@@ -11,6 +11,20 @@ function SimpleAdding(num) {
   return sum;
 }
 
-test = 12;
+test = 4;
 answer = SimpleAdding(test);
-console.log(test);
+
+// With recursion
+function SimpleAddingRecursively(num) {
+  if (num > 0) {
+    console.log('foo(' + (num - 1) + ') + ' + num);
+    return SimpleAddingRecursively(num - 1) + num;
+  } else {
+    return num;
+  }
+}
+
+// ((((0 + 1) + 2) + 3) + 4)
+
+answer = SimpleAddingRecursively(test);
+console.log(answer);
