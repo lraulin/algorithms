@@ -8,4 +8,4 @@ function destroyer(arr) {
 
 const answer = destroyer([1, 2, 3, 1, 2, 3], 2, 3);
 const answer2 = destroyer([3, 5, 1, 2, 2], 2, 3, 5);
-console.log(answer2);
+console.log(answer);
