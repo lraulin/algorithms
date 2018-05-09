@@ -27,4 +27,4 @@ def shuffled_random_sequence(min, max):
 
 
 # shuffled_sequence(1, 400000)
-shuffled_random_sequence(-250000, 250000)
+shuffled_random_sequence(0, 25)
