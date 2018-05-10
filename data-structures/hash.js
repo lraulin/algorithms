@@ -2,13 +2,13 @@
 
 const createNode = element => ({
   element,
-  next: null
+  next: null,
 });
 
 const createLinkedList = () => ({
   length: 0,
   head: null,
-  append: function(element) {
+  append(element) {
     let node = createNode(element),
       current;
     if (this.head === null) {
@@ -22,7 +22,7 @@ const createLinkedList = () => ({
     }
     this.length++;
   },
-  removeAt: function(position) {
+  removeAt(position) {
     if (position > -1 && position < this.length) {
       let current = this.head,
         previous,
@@ -42,7 +42,7 @@ const createLinkedList = () => ({
       return null;
     }
   },
-  insert: function(position, element) {
+  insert(position, element) {
     if (position >= 0 && position <= this.length) {
       let node = new Node(element),
         current = this.head,
@@ -66,24 +66,22 @@ const createLinkedList = () => ({
       return false;
     }
   },
-  toString: function() {
-    console.log("stringifying");
+  toString() {
     let current = this.head,
       string = "";
 
     while (current) {
-      console.log("still current...");
       string += current.element + (current.next ? "n" : "");
       current = current.next;
     }
     return string;
   },
-  indexOf: function() {
+  indexOf(element) {
     let current = this.head,
       index = -1;
 
     while (current) {
-      if (element === current.elemente) {
+      if (element === current.element) {
         return index;
       }
       index++;
@@ -91,55 +89,55 @@ const createLinkedList = () => ({
     }
     return -1;
   },
-  remove: function(element) {
+  remove(element) {
     let index = this.indexOf(element);
     return this.removeAt(index);
   },
-  isEmpty: function() {
+  isEmpty() {
     return this.length === 0;
   },
-  size: function() {
+  size() {
     return this.length;
   },
-  getHead: function() {
+  getHead() {
     return this.head;
-  }
+  },
 });
 
-console.log("**LINKED LIST**");
-let list = createLinkedList();
-list.append(15);
-list.append(10);
-console.log(list.size());
-console.log(list.toString());
+// console.log("**LINKED LIST**");
+// let list = createLinkedList();
+// list.append(15);
+// list.append(10);
+// console.log(list.size());
+// console.log(list.toString());
 
 console.log("**END LINKED LIST END*");
 
 const createDictionary = () => ({
   items: {},
-  has: function(key) {
+  has(key) {
     return key in this.items;
   },
-  set: function(key, value) {
+  set(key, value) {
     this.items[key] = value;
   },
-  delete: function(key) {
+  delete(key) {
     if (this.has(key)) {
       delete this.items[key];
       return true;
     }
     return false;
   },
-  clear: function() {
+  clear() {
     this.items = {};
   },
-  size: function() {
+  size() {
     return Object.keys(this.items).length;
   },
-  get: function(key) {
+  get(key) {
     return this.has(key) ? this.items[key] : undefined;
   },
-  values: function() {
+  values() {
     const values = [];
     for (var k in this.items) {
       if (this.has(k)) {
@@ -148,71 +146,103 @@ const createDictionary = () => ({
     }
     return values;
   },
-  keys: function() {
+  keys() {
     return Object.keys(this.items);
   },
-  getItems: function() {
+  getItems() {
     return this.items;
-  }
+  },
 });
 
-const dictionary = createDictionary();
-dictionary.set("Gandalf", "gandalf@email.com");
-dictionary.set("John", "johnsnow@email.com");
-dictionary.set("Tyrion", "tyrion@email.com");
-console.log(dictionary.has("Gandalf"));
-console.log(dictionary.size());
-console.log(dictionary.values());
-console.log(dictionary.get("Tyrion"));
-dictionary.delete("John");
-console.log("John deleted");
-console.log(dictionary.keys());
-console.log(dictionary.values());
-console.log(dictionary.getItems());
+// const dictionary = createDictionary();
+// dictionary.set("Gandalf", "gandalf@email.com");
+// dictionary.set("John", "johnsnow@email.com");
+// dictionary.set("Tyrion", "tyrion@email.com");
+// console.log(dictionary.has("Gandalf"));
+// console.log(dictionary.size());
+// console.log(dictionary.values());
+// console.log(dictionary.get("Tyrion"));
+// dictionary.delete("John");
+// console.log("John deleted");
+// console.log(dictionary.keys());
+// console.log(dictionary.values());
+// console.log(dictionary.getItems());
 
-// loose hash function
+const createValuePair = ({ key, value } = {}) => ({
+  key,
+  value,
+  toString() {
+    return "[" + this.key + " - " + this.value + "]";
+  },
+});
+
+// Hash table with loose hash function and separate chaining for collision avoidance
 const createHashTable = () => ({
   table: [],
   // separate chaining...simplest but requires extra memory
-  valuePair: function(key, value) {
-    key = key;
-    value = value;
-    toString = function() {
-      return "[" + this.key + " - " + this.value + "]";
-    };
+  hashCode(key) {
+    return djb2HashCode(key);
   },
-  loseloseHashCode: function(key) {
-    let hash = 0;
-    for (let i = 0; i < key.length; i++) {
-      hash += key.charCodeAt(i);
+  put(key, value) {
+    const position = this.hashCode(key);
+    if (this.table[position] == undefined) {
+      this.table[position] = createLinkedList();
     }
-    return hash % 37;
-  },
-  put: function(key, value) {
-    const position = this.loseloseHashCode(key);
     console.log(position + " = " + key);
-    this.table[position] = createLinkedList();
+    this.table[position].append(createValuePair({ key, value }));
   },
-  get: function(key) {
-    return this.table[this.loseloseHashCode(key)];
+  get(key) {
+    const position = this.hashCode(key);
+    if (this.table[position] !== undefined) {
+      let current = this.table[position].getHead();
+      while (current.next) {
+        if (current.element.key === key) {
+          return current.element.value;
+        }
+        current = current.next;
+      }
+      if (current.element.key === key) {
+        return current.element.value;
+      }
+    }
+    return undefined;
   },
-  remove: function(key) {
-    this.table[this.loseloseHashCode(key)] = undefined;
+  remove(key) {
+    const position = this.hashCode(key);
+    if (this.table[position] !== undefined) {
+      let current = this.table[position].getHead();
+      while (current.next) {
+        if (current.element.key === key) {
+          this.table[position].remove(current.element);
+          if (this.table[position].isEmpty()) {
+            this.table[position] = undefined;
+          }
+          return true;
+        }
+        current = current.next;
+      }
+      if (current.element.key === key) {
+        this.table[position].remove(current.element);
+        if (this.table[position].isEmpty()) {
+          this.table[position] = undefined;
+        }
+        return true;
+      }
+    }
+    return false;
   },
-  print: function() {
+  print() {
     for (let i = 0; i < this.table.length; i++) {
       if (this.table[i] !== undefined) {
         console.log(i + ": " + this.table[i]);
       }
     }
-  }
+  },
 });
 
 const hash = createHashTable();
 hash.put("Gandalf", "gandalf@email.com");
 hash.put("John", "johnsnow@email.com");
-hash.put("Tyrion", "tyrion@email.com");
-hash.put("Aaron", "aaron@email.com");
 hash.put("Donnie", "donnie@email.com");
 hash.put("Ana", "ana@email.com");
 hash.put("Jonathan", "jonathan@email.com");
@@ -231,34 +261,48 @@ console.log(hash.get("CirceTheBitch"));
 // My (first) attempt at a hash set.
 const createHashArray = () => ({
   set: [],
-  loseloseHashCode: function(key) {
-    let hash = 0;
-    for (let i = 0; i < key.length; i++) {
-      hash += key.charCodeAt(i);
-    }
-    return hash % 37;
+  hashCode(key) {
+    return djb2HashCode(key);
   },
-  put: function(key) {
-    const position = loseloseHashCode(key);
+  put(key) {
+    const position = this.hashCode(key);
     console.log(position + " = " + key);
     this.set[position] = key;
   },
-  putArray: function(arr) {
+  putArray(arr) {
     for (let i of arr) {
       this.put(i);
     }
   },
-  get: function(key) {
-    return this.set[loseloseHashCode(key)];
+  get(key) {
+    return this.set[hashCode(key)];
   },
-  remove: function(key) {
-    this.set[loseloseHashCode(key)] = undefined;
+  remove(key) {
+    this.set[hashCode(key)] = undefined;
   },
-  print: function() {
+  print() {
     for (let i = 0; i < set.length; i++) {
       if (set[i] !== undefined) {
         console.log(i + ": " + set[i]);
       }
     }
-  }
+  },
 });
+
+function loseloseHashCode(key) {
+  // Not a good hash code.
+  let hash = 0;
+  for (let i = 0; i < key.length; i++) {
+    hash += key.charCodeAt(i);
+  }
+  return hash % 37;
+}
+
+function djb2HashCode(key) {
+  // Simple hash code but better than lose lose.
+  let hash = 5381;
+  for (let i = 0; i < key.length; i++) {
+    hash = hash * 33 + key.charCodeAt(i);
+  }
+  return hash % 1013;
+}

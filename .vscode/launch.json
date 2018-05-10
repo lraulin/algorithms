@@ -8,7 +8,7 @@
       "type": "node",
       "request": "launch",
       "name": "Launch Program",
-      "program": "${workspaceFolder}/data-structures/hash.js"
+      "program": "${file}"
     }
   ]
 }

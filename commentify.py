@@ -20,11 +20,11 @@ def python_line():
     pyperclip.copy(new_text)
 
 
-def python_block():
+def block():
     text = pyperclip.paste()
     print(text)
     text = text.split(' ')
-    new_text = ['"""\n']
+    new_text = ['']
     line = 0
 
     for word in text:
@@ -35,10 +35,9 @@ def python_block():
             new_text[line] += ' '
         else:
             new_text[line] += word + ' '
-    new_text[line] += '\n"""'
 
     new_text = ''.join(new_text)
     pyperclip.copy(new_text)
 
 
-python_block()
+block()
