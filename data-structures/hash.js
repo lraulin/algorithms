@@ -1,3 +1,120 @@
+"use strict";
+
+const createNode = element => ({
+  element,
+  next: null,
+});
+
+const createLinkedList = () => ({
+  length: 0,
+  head: null,
+  append: function(element) {
+    let node = createNode(element),
+      current;
+    if (head === null) {
+      head = node;
+    } else {
+      current = head;
+      while (current.next) {
+        current = current.next;
+      }
+      current.next = node;
+    }
+    length++;
+  },
+  removeAt: function(position) {
+    if (position > -1 && position < length) {
+      let current = head,
+        previous,
+        index = 0;
+      if (position === 0) {
+        head = current.next;
+      } else {
+        while (index++ < position) {
+          previous = current;
+          current = current.next;
+        }
+        previous.next = current.next;
+      }
+      length--;
+      return current.element;
+    } else {
+      return null;
+    }
+  },
+  insert: function(position, element) {
+    if (position >= 0 && position <= length) {
+      let node = new Node(element),
+        current = head,
+        previous,
+        index = 0;
+
+      if (position === 0) {
+        node.next = current;
+        head = node;
+      } else {
+        while (index++ < position) {
+          previous = current;
+          current = current.next;
+        }
+        node.next = current;
+        previous.next = node;
+      }
+      length++;
+      return true;
+    } else {
+      return false;
+    }
+  },
+  toString: function() {
+    console.log("stringifying");
+    let current = head,
+      string = "";
+
+    while (current) {
+      console.log("still current...");
+      string += current.element + (current.next ? "n" : "");
+      current = current.next;
+    }
+    return string;
+  },
+  indexOf: function() {
+    let current = head,
+      index = -1;
+
+    while (current) {
+      if (element === current.elemente) {
+        return index;
+      }
+      index++;
+      current = current.next;
+    }
+    return -1;
+  },
+  remove: function(element) {
+    let index = this.indexOf(element);
+    return this.removeAt(index);
+  },
+  isEmpty: function() {
+    return length === 0;
+  },
+  size: function() {
+    return length;
+  },
+  getHead: function() {
+    return head;
+  },
+});
+
+console.log("**LINKED LIST**");
+let list = new LinkedList();
+list.append(15);
+list.append(10);
+console.log(list.size());
+console.log(list.toString());
+
+console.log("**END LINKED LIST END*");
+
 function Dictionary() {
   const items = {};
 
@@ -66,6 +183,15 @@ function Dictionary() {
 function HashTable() {
   const table = [];
 
+  // separate chaining...simplest but requires extra memory
+  const ValuePair = function(key, value) {
+    this.key = key;
+    this.value = value;
+    this.toString = function() {
+      return "[" + this.key + " - " + this.value + "]";
+    };
+  };
+
   const loseloseHashCode = function(key) {
     let hash = 0;
     for (let i = 0; i < key.length; i++) {
@@ -77,7 +203,7 @@ function HashTable() {
   this.put = function(key, value) {
     const position = loseloseHashCode(key);
     console.log(position + " = " + key);
-    table[position] = value;
+    table[position] = new LinkedList();
   };
 
   this.get = function(key) {
@@ -117,8 +243,9 @@ function HashTable() {
 // hash.print();
 // console.log(hash.get("CirceTheBitch"));
 
+// My (first) attempt at a hash set.
 function HashArray() {
-  const table = [];
+  const set = [];
 
   const loseloseHashCode = function(key) {
     let hash = 0;
@@ -131,7 +258,7 @@ function HashArray() {
   this.put = function(key) {
     const position = loseloseHashCode(key);
     console.log(position + " = " + key);
-    table[position] = key;
+    set[position] = key;
   };
 
   this.putArray = function(arr) {
@@ -141,26 +268,18 @@ function HashArray() {
   };
 
   this.get = function(key) {
-    return table[loseloseHashCode(key)];
+    return set[loseloseHashCode(key)];
   };
 
   this.remove = function(key) {
-    table[loseloseHashCode(key)] = undefined;
+    set[loseloseHashCode(key)] = undefined;
   };
 
   this.print = function() {
-    for (let i = 0; i < table.length; i++) {
-      if (table[i] !== undefined) {
-        console.log(i + ": " + table[i]);
+    for (let i = 0; i < set.length; i++) {
+      if (set[i] !== undefined) {
+        console.log(i + ": " + set[i]);
       }
     }
   };
 }
-
-const loseloseHashCode = function(key) {
-  let hash = 0;
-  for (let i = 0; i < key.length; i++) {
-    hash += key.charCodeAt(i);
-  }
-  return hash % 37;
-};
