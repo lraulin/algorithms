@@ -1,0 +1,11 @@
+{
+  "name": "algorithms",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/lraulin/algorithms.git",
+  "author": "Lee Raulin <leeraulin@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "stampit": "^4.1.1"
+  }
+}
