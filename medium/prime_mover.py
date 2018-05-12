@@ -12,10 +12,16 @@ def prime_mover(num):
         for prime in primes:
             if current % prime == 0:
                 break
+        # Python for has an else clause! It executes if the loop completes
+        # without encountering break.
         else:
             primes.append(current)
         current += 2
+    print(primes)
     return(primes[-1])
+
+
+print(prime_mover(16))
 
 
 def PrimeMover(num):
@@ -52,6 +58,3 @@ def PrimeMover(num):
                 break
 
     return n-1
-
-
-print PrimeMover(250)
