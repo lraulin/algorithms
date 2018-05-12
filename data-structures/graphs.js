@@ -36,7 +36,7 @@ const Queue = stampit({
     };
 
     this.toString = function() {
-      console.log(queue);
+      return queue.slice(offset).toString();
     };
   },
 });
