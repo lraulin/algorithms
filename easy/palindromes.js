@@ -1,11 +1,10 @@
-function reverseString(str) {
-  console.log(str);
-  var newStr = str.split('').reverse().join('');
-  return newStr;
-}
-
-function palindrome(str) {
-  str = str.toLowerCase().replace(/[^A-za-z0-9]|_/g, '');
-  console.log(str);
-  return reverseString(str) == str;
+function Palindrome(str) {
+  return (
+    str
+      .toLowerCase()
+      .replace(/\W/g, "")
+      .split("")
+      .reverse()
+      .join("") == str.replace(/\W/g, "").toLowerCase()
+  );
 }
