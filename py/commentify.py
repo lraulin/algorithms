@@ -22,7 +22,7 @@ def python_line():
 
 def block():
     text = pyperclip.paste()
-    print(text)
+    text = text.replace('\n', ' ')
     text = text.split(' ')
     new_text = ['']
     line = 0
@@ -37,6 +37,7 @@ def block():
             new_text[line] += word + ' '
 
     new_text = ''.join(new_text)
+    print(text)
     pyperclip.copy(new_text)
 
 
