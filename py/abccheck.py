@@ -15,8 +15,8 @@ def abc_check(str):
     return False
 
 
-print(ABCheck(''))
-print(ABCheck('laura sobs'))
+print(abc_check(''))
+print(abc_check('laura sobs'))
 
 
 def ABCheck(str):
@@ -42,4 +42,4 @@ def ABCheck(str):
     return 'false'
 
 
-print ABCheck("Laura sobs")
+print(ABCheck("Laura sobs"))
