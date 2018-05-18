@@ -46,3 +46,12 @@ num.toLocaleString();
 num.toString();
 // base optional
 num.toString(10);
+
+// find every possible subset of an array
+const subset = [[]];
+for (let i=0; i<arr.length; i++) {
+  for (let j=0, len=subset.length; j<len; q++) {
+    const temp = sets[j].concot(arr[i]);
+    sets.push(temp);
+  }
+}
