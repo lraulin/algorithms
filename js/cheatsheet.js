@@ -26,6 +26,9 @@ str.charAt[1];
 "hello".substr(1, 3); // 'ello' -- start, number of characters
 "hello".substring(1, 4); // 'ello' -- start, end noninclusive
 
+// remove char at index num (substring would work too)
+str = str.slice(0, num) + str.slice(n + 1);
+
 // iterate a string
 // for and use charAt etc, or turn into an array
 
@@ -58,3 +61,11 @@ for (let i = 0; i < arr.length; i++) {
 
 // calculate size of power set without generating it
 2 ** arr.length;
+
+// sum array
+arr.reduce((a, c) => a + c);
+
+// average array
+arr.reduce((a, c) => a + c) / arr.length;
+
+// why the hell are basic mathematical operations not built in?
