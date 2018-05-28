@@ -69,3 +69,6 @@ arr.reduce((a, c) => a + c);
 arr.reduce((a, c) => a + c) / arr.length;
 
 // why the hell are basic mathematical operations not built in?
+
+// sort array numerically (default sorts numbers lexigraphically)
+arr.sort((a, b) => b - a);
