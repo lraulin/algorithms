@@ -31,7 +31,6 @@ function PalindromeSwapper(str) {
   }
   for (let i = 1; i < str.length; i++) {
     const swap = str.slice(0, i - 1) + str[i] + str[i - 1] + str.slice(i + 1);
-    console.log(swap);
     if (
       swap ===
       swap
