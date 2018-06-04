@@ -46,7 +46,7 @@ function MovingMedian(arr) {
     const subarr = arr.slice(start, i + 1);
     res.push(median(subarr));
   }
-  return res;
+  return res.join(",");
 }
 
 test = [3, 1, 3, 5, 10, 6, 4, 3, 1];
