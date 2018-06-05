@@ -24,6 +24,10 @@
  * way to solve this challenge.
  */
 
+// The key seems to be that for a path to be correct, the sum of horizontal
+// moves and the sum of vertical moves has to be 4. Perhaps I could use this
+// to avoid checking too many possibilities.
+
 function initGrid(size) {
   const grid = [];
   for (let i = 0; i < size; i++) {
@@ -46,3 +50,89 @@ function CorrectPath(str) {
 
 test = "";
 console.log(CorrectPath(test));
+
+// hunsoo's answer
+// check if the given directions can reach the finish line
+// without touching previously visited positions
+function canNavigate(str) {
+  var position = [0, 0];
+  var visited = {};
+  for (var i = 0; i < str.length; i++) {
+    switch (str[i]) {
+      case "u":
+        position[0]--;
+        if (position[0] < 0) return false;
+        break;
+      case "d":
+        position[0]++;
+        if (position[0] > 4) return false;
+        break;
+      case "l":
+        position[1]--;
+        if (position[1] < 0) return false;
+        break;
+      case "r":
+        position[1]++;
+        if (position[1] > 4) return false;
+        break;
+      default:
+        break;
+    }
+    if (visited[position[0] + "-" + position[1]]) {
+      // already visited before
+      return false;
+    } else {
+      // mark as visited
+      visited[position[0] + "-" + position[1]] = i;
+    }
+  }
+
+  return position[0] === 4 && position[1] === 4;
+}
+
+function findMissingChars(str) {
+  // first, generate all possible cases: replacing ? with directions
+  var permutations = [""];
+  for (var i = 0; i < str.length; i++) {
+    if (str[i] === "?") {
+      var newPermutations = [];
+      permutations.forEach(function(permutation) {
+        newPermutations.push(permutation + "u");
+        newPermutations.push(permutation + "d");
+        newPermutations.push(permutation + "l");
+        newPermutations.push(permutation + "r");
+      });
+      permutations = newPermutations;
+    } else {
+      permutations = permutations.map(permutation => permutation + str[i]);
+    }
+  }
+
+  // now filter out only valid ones
+  // we need a net result of 4 downs and 4 rights
+  return permutations.filter(function(permutation) {
+    var rightCount =
+      permutation.match(/[r]/g) === null ? 0 : permutation.match(/[r]/g).length;
+    var leftCount =
+      permutation.match(/[l]/g) === null ? 0 : permutation.match(/[l]/g).length;
+    var upCount =
+      permutation.match(/[u]/g) === null ? 0 : permutation.match(/[u]/g).length;
+    var downCount =
+      permutation.match(/[d]/g) === null ? 0 : permutation.match(/[d]/g).length;
+
+    return rightCount - leftCount === 4 && downCount - upCount === 4;
+  });
+}
+
+function CorrectPath(str) {
+  var validPaths = findMissingChars(str);
+
+  for (var validPath of validPaths) {
+    if (canNavigate(validPath)) {
+      return validPath;
+    }
+  }
+}
+
+// keep this function call here
+CorrectPath(readline());
