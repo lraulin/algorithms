@@ -48,5 +48,6 @@ function plusMinus(num) {
   return "not possible";
 }
 
-test = 26712;
+// test = 26712;
+test = 199;
 console.log(plusMinus(test));
