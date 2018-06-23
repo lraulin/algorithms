@@ -28,11 +28,7 @@ function fizzBuzz(num) {
     if (i % 5 === 0) {
       output += "Buzz";
     }
-    if (output) {
-      console.log(output);
-    } else {
-      console.log(i);
-    }
+    console.log(output || i);
   }
 }
 
