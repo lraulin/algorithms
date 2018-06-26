@@ -68,21 +68,23 @@ const createBinaryTree = (arr = []) => ({
     }
     path.push(root);
     if (this.tree[root] === n) {
-      return path;
+      return true;
     }
     if (
       this.findPath(this.leftChildIndex(root), path, n) ||
       this.findPath(this.rightChildIndex(root), path, n)
     ) {
-      return path;
+      return true;
     }
 
     path.pop();
     return false;
   },
   findLCA(n1, n2) {
-    const path1 = this.findPath(0, [], n1);
-    const path2 = this.findPath(0, [], n2);
+    const path1 = [];
+    this.findPath(0, path1, n1);
+    const path2 = [];
+    this.findPath(0, path2, n2);
     if (path1.length && path2.length) {
       let node;
       for (let i = 0; i < path1.length || i < path2.length; i++) {
@@ -96,11 +98,10 @@ const createBinaryTree = (arr = []) => ({
   },
 });
 
-// let's see if this Rube-Goldberg device is going to work...
 // first, parse input
-// const test = ["[12, 5, 9, 6, 2, 0, 8, #, #, 7, 4, #, #, #, #]", "6", "4"];
+const test = ["[12, 5, 9, 6, 2, 0, 8, #, #, 7, 4, #, #, #, #]", "6", "4"];
 // const test = ["[5, 2, 6, 1, #, 8, #]", "2", "6"];
-const test = ["[5, 2, 6, 1, #, 8, 12, #, #, #, #, #, #, 3, #]", "3", "12"];
+// const test = ["[5, 2, 6, 1, #, 8, 12, #, #, #, #, #, #, 3, #]", "3", "12"];
 const testArr = test[0]
   .slice(1, test[0].length - 1)
   .split(",")
@@ -115,7 +116,3 @@ const n1 = parseInt(test[1]);
 const n2 = parseInt(test[2]);
 const tree = createBinaryTree(testArr);
 console.log(tree.findLCA(n1, n2));
-
-// It works... but most implimentations pass in the array, but only return
-// true or false, and rely on the array being appropriately mutated as a side-
-// effect. When I try it that way, it stops working. Why?
