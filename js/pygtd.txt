@@ -16,8 +16,8 @@
 (P) Complete curses interface
 (P) Make a clone of the Convict Conditioning app
 (P) Complete GTD CLI app
-(S) VA Appointment in Charlottesville due:2018-06-21T15:30:00-04:00
 (S) Doit.im Expires (Renews?) $2 due:2018-06-28
+(S) DC Code & Coffee 2.55 @ U.S. News & World Report due:2018-07-01T13:00:00-04:00
 (S) Need Adderall Refill due:2018-07-02
 (S) Independence Day due:2018-07-04
 (S) Sane Box $7 Autorenew due:2018-07-06
@@ -47,6 +47,10 @@
 (Z) watch video on jumprope workout
 (Z) learn lisp
 (Z) 
+make tutorial: find lca in binary search tree
+learn express
+learn sass
+make resume video
 check out web dev position congressional budget office 18-32 announcement number
 add ability to drag and drop scores to swap
 make YouTube resume/introduction

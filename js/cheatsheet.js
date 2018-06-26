@@ -72,3 +72,10 @@ arr.reduce((a, c) => a + c) / arr.length;
 
 // sort array numerically (default sorts numbers lexigraphically)
 arr.sort((a, b) => a - b);
+
+// extract number array from string representation
+arr = '[1, 2, 3]'
+const testArr = arr
+.slice(1, test[0].length - 1)
+.split(",")
+.map(x => parseInt(x));
