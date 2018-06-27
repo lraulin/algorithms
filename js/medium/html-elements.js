@@ -25,6 +25,7 @@
  */
 
 function htmlElements(str) {
+  // container for current element
   let el = "";
   // flag to decide whether current char should be appended to current element
   let recording = false;
@@ -37,6 +38,8 @@ function htmlElements(str) {
       continue;
     }
     if (str[i] === ">") {
+      // we're at the end of the element, so decide if it's an opening or
+      // closing element, and push to or pop the stack accordingly
       recording = false;
       if (el[0] === "/") {
         // tag is closing tag: check if it matches last opening tag
