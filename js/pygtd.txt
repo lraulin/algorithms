@@ -47,6 +47,7 @@
 (Z) watch video on jumprope workout
 (Z) learn lisp
 (Z) 
+vacuum room
 make tutorial: find lca in binary search tree
 learn express
 learn sass
