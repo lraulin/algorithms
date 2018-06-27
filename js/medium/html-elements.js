@@ -25,11 +25,14 @@
  */
 
 function htmlElements(str) {
+  /* param str: html as plain-text string
+   * return (string): 'true' if valid, name of first invalid element otherwise
+   */
   // container for current element
   let el = "";
   // flag to decide whether current char should be appended to current element
   let recording = false;
-  // stack of open element names without angle brackets
+  // stack of open tag names without angle brackets
   let stack = [];
   for (let i = 0; i < str.length; i++) {
     if (str[i] === "<") {
@@ -38,8 +41,9 @@ function htmlElements(str) {
       continue;
     }
     if (str[i] === ">") {
-      // we're at the end of the element, so decide if it's an opening or
-      // closing element, and push to or pop the stack accordingly
+      // we're at the end of the tag, so decide if it's an opening or
+      // closing tag, and push to or pop the stack accordingly
+      // stop 'recording' and don't start until after the next <
       recording = false;
       if (el[0] === "/") {
         // tag is closing tag: check if it matches last opening tag
@@ -47,24 +51,30 @@ function htmlElements(str) {
           // open tag has been closed, so pop the stack
           stack.pop();
         } else {
-          // closing tag doesn't match open, so previous tag is first invalid
+          // closing tag doesn't match open, so the last unclosed tag is the
+          // first invalid tag. return its name
           return stack[stack.length - 1];
         }
       } else {
-        // tag is opening tag; add it to the stack
+        // tag is opening tag
         stack.push(el);
       }
       // reset el for next element
       el = "";
     }
     if (recording) {
+      // we're in the middle of a tag, so append char to current element
       el += str[i];
     }
   }
-  // if stack isn't empty, not all of our tags were closed
+  // finished processing each char in string
+  // if stack isn't empty, not all of our tags were closed, so return the
+  // name of the unclosed tag
   if (stack.length) {
     return stack[0];
   }
+  // we got to the end and there are no unclosed tags, therefore the html
+  // is valid
   return "true";
 }
 
