@@ -27,13 +27,20 @@ function stringReduction(str) {
   let flag = true;
   while (flag) {
     flag = false;
+    // if it's still false after the for loop, that means we've gone through
+    // the whole string and found no possible substitutions, so we're done
     for (let i = 0; i < str.length - 1; i++) {
       if (str[i] !== str[i + 1]) {
         let newLetter = "abc";
+        // remove letters in the current pair, leaving only the one remaining
+        // letter
         newLetter = newLetter.replace(str[i], "");
         newLetter = newLetter.replace(str[i + 1], "");
         str = str.slice(0, i) + newLetter + str.slice(i + 2);
         flag = true;
+        // we shortened the string by 1, so decrement to cancel the next
+        // increment, so next loop will compare new letter with next letter
+        i--;
       }
     }
   }

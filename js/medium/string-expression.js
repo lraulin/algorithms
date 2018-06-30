@@ -99,7 +99,9 @@ function stringExpression(str) {
       console.log("Error: Invalid Input");
     }
   }
-  console.log(expStr);
+  // 'onezerominusfive' is now '10 -5'...if plus it would be '10 5'
+  // split on spaces, convert to ints, add them all together, then change the
+  // result to a string, and split it into an array of chars
   const res = expStr
     .split(" ")
     .map(x => parseInt(x))
@@ -108,6 +110,7 @@ function stringExpression(str) {
     .split("");
 
   let resString = "";
+  // get the corresponding word for each digit and append to result string
   for (let i = 0; i < res.length; i++) {
     resString += nums[res[i]];
   }

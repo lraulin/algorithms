@@ -27,7 +27,9 @@
 function stockPicker(arr) {
   let maxProfit = 0;
   for (let i = 0; i < arr.length; i++) {
+    // find the biggest subsequent number
     const maxAfter = Math.max(...arr.slice(i + 1));
+    // update maxProfit if appropriate
     if (maxAfter > arr[i] && maxAfter - arr[i] > maxProfit) {
       maxProfit = maxAfter - arr[i];
     }
