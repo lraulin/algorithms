@@ -11,3 +11,5 @@ function factorialize(num) {
     return 1;
   }
 }
+
+console.log(factorialize(5));

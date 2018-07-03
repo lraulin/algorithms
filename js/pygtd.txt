@@ -1,0 +1,60 @@
+(N) clean pipe with rubbing alcohol
+(N) Revise pygtd: refactor exception handling for KeyError to use get method instead
+(N) Add picture with cousin on Instagram
+(N) @Dad Ask dad for picture with cousin
+(N) get next actions to print with title of associated project and projects to print indented next actions
+(N) Ask mom to get toothbrush head replacements
+(P) Get a job
+(P) Make a better portfolio site
+(P) Apply to jobs online
+(P) Get references
+(P) @ Write Joe and ask if I can use him as a reference
+(P) @ Talk to parents about who I could use as references
+(P) Beef up portfolio
+(P) Make an ASP.NET GTD app
+(P) Make a React version of GTD app
+(P) Complete curses interface
+(P) Make a clone of the Convict Conditioning app
+(P) Complete GTD CLI app
+(S) Doit.im Expires (Renews?) $2 due:2018-06-28
+(S) DC Code & Coffee 2.55 @ U.S. News & World Report due:2018-07-01T13:00:00-04:00
+(S) Need Adderall Refill due:2018-07-02
+(S) Independence Day due:2018-07-04
+(S) Sane Box $7 Autorenew due:2018-07-06
+(S) Curiosity Stream Autorenew $2.99 due:2018-07-09
+(S) Navient Payment Due $171.69 due:2018-07-26
+(S) Sane Box $7 Autorenew due:2018-08-06
+(S) Curiosity Stream Autorenew $2.99 due:2018-08-09
+(S) Navient Payment Due $171.69 due:2018-08-26
+(W) toothbrush heads from mom or dad
+(W) PenFed to get fraud form
+(W) 
+(Z) fix screen door
+(Z) watch Writing Awesome Command-Line Programs in Python https://youtu.be/gR73nLbbgqY
+(Z) make castle of the winds as react rogue-like
+(Z) make a photography site for dad
+(Z) write function to create daily/repeating tasks if they don't exist or are were completed a day or more ago
+(Z) set up chron jobs to get weather and tasks
+(Z) change password
+(Z) setup old computer as server
+(Z) https://www.chesapeakebay.net/who/jobs
+(Z) get references
+(Z) watch more videos by Aaron in Beta on YouTube about how to get a job as a web developer
+(Z) wishlist: nespresso machine
+(Z) wishlist: macbook
+(Z) catch up on the Americans
+(Z) make script to check if calibre is latest version and update if not
+(Z) watch video on jumprope workout
+(Z) learn lisp
+(Z) 
+vacuum room
+make tutorial: find lca in binary search tree
+learn express
+learn sass
+make resume video
+check out web dev position congressional budget office 18-32 announcement number
+add ability to drag and drop scores to swap
+make YouTube resume/introduction
+https://www.meetup.com/React-MD/events/251424132/?rv=ea1&_xtd=gatlbWFpbF9jbGlja9oAJDc2N2U2YzQxLWI1NzItNDAyNS1hNWU0LWM5Y2M5NzU5ZWE0Mg&_cookie-check=1h7caPysS1dBZG1Q
+convict conditioning app clone
+fix filepath
