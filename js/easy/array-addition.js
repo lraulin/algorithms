@@ -13,6 +13,7 @@ function ArrayAdditionI(arr) {
 
   const sets = [[]];
   console.log(arr);
+  // create superset
   for (let i = 0; i < arr.length; i++) {
     for (let j = 0, len = sets.length; j < len; j++) {
       const temp = sets[j].concat(arr[i]);
@@ -20,11 +21,11 @@ function ArrayAdditionI(arr) {
       const s = temp.reduce((p, c) => p + c);
       console.log(sets);
       if (s === sum) {
-        return "true";
+        return 'true';
       }
     }
   }
-  return "false";
+  return 'false';
 }
 
 ArrayAdditionI([5, 7, 16, 1, 2]);
