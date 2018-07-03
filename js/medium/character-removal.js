@@ -24,6 +24,8 @@
  */
 
 function countChars(str) {
+  // return object containing letters in str as keys and number of occurances as value
+  // ie ball: {'b': 1, 'a': 1, 'l':2}
   const charCount = {};
   for (let i = 0; i < str.length; i++) {
     if (!charCount[str[i]]) {
@@ -39,18 +41,31 @@ function characterRemoval(strArr) {
   const word = strArr[0];
   const wordMap = countChars(word);
   const dict = strArr[1].split(',');
-  // sort from biggest to smallest
-  dict.sort((a, b) => b.length - a.length);
   let minChars = -1;
   outerLoop: for (let i = 0; i < dict.length; i++) {
-    let removeCount = 0;
+    // check that word has all letters in dict word
     dictWordMap = countChars(dict[i]);
     for (let letter in dictWordMap) {
-      // if word doesn't have the necessary characters, skip to next word
       if (!wordMap[letter] || wordMap[letter] < dictWordMap[letter]) {
         continue outerLoop;
       }
     }
+    // check that letters are in the correct order
+    let index = 0;
+    for (let j = 0; i < dict[i].length; j++) {
+      let found = false;
+      while (!found) {
+        if (dict[i][j] === word[index]) {
+          found = true;
+        }
+        index++;
+        if (index >= word.length) {
+          continue outerLoop;
+        }
+      }
+    }
+    // word contains all letters in the correct order, so the number
+    // of letters to be removed is the difference in length
     const removeChars = word.length - dict[i].length;
     if (minChars === -1 || removeChars < minChars) {
       minChars = removeChars;
@@ -59,6 +74,6 @@ function characterRemoval(strArr) {
   return minChars;
 }
 
-// const test = ['baseball', 'a,all,b,ball,bas,base,cat,code,d,e,quit,z'];
-const test = ['apbpleeeef', 'a,ab,abc,abcg,b,c,dog,e,efd,zzzz'];
+const test = ['baseball', 'a,all,b,llab,bas,cat,code,d,e,quit,z'];
+// const test = ['apbpleeeef', 'a,ab,abc,abcg,b,c,dog,e,efd,zzzz'];
 console.log(characterRemoval(test));
