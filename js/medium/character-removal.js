@@ -43,18 +43,20 @@ function characterRemoval(strArr) {
   const dict = strArr[1].split(',');
   let minChars = -1;
   outerLoop: for (let i = 0; i < dict.length; i++) {
-    // check that word has all letters in dict word
-    dictWordMap = countChars(dict[i]);
-    for (let letter in dictWordMap) {
-      if (!wordMap[letter] || wordMap[letter] < dictWordMap[letter]) {
-        continue outerLoop;
-      }
-    }
+    // check that word has all necessary letters
+    // dictWordMap = countChars(dict[i]);
+    // for (let letter in dictWordMap) {
+    //   if (!wordMap[letter] || wordMap[letter] < dictWordMap[letter]) {
+    //     continue outerLoop;
+    //   }
+    // }
     // check that letters are in the correct order
     let index = 0;
-    for (let j = 0; i < dict[i].length; j++) {
+    for (let j = 0; j < dict[i].length; j++) {
       let found = false;
+      let dictWord = dict[i];
       while (!found) {
+        let dictLetter = dict[i][j];
         if (dict[i][j] === word[index]) {
           found = true;
         }
@@ -66,6 +68,7 @@ function characterRemoval(strArr) {
     }
     // word contains all letters in the correct order, so the number
     // of letters to be removed is the difference in length
+    console.log(dict[i]);
     const removeChars = word.length - dict[i].length;
     if (minChars === -1 || removeChars < minChars) {
       minChars = removeChars;
@@ -74,6 +77,6 @@ function characterRemoval(strArr) {
   return minChars;
 }
 
-const test = ['baseball', 'a,all,b,llab,bas,cat,code,d,e,quit,z'];
+const test = ['baseball', 'all,b,llab,bas,cat,code,d,e,quit,z'];
 // const test = ['apbpleeeef', 'a,ab,abc,abcg,b,c,dog,e,efd,zzzz'];
 console.log(characterRemoval(test));
