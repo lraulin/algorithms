@@ -36,9 +36,10 @@
  * and increment the count of 'holes'.
  */
 
-const makeGraph = graph => ({
-  // factory function to create a graph object with methods to find 'holes' in
-  // a boolean 2d array represented as an array of strings
+const createGraph = graph => ({
+  // factory function to create a graph object with methods to find number of
+  // 'holes' (groups of adjacent '0's, where adjacent means above, below, left,
+  // or right) in a boolean 2d array represented as an array of strings
   rows: graph.length,
   columns: graph[0].length,
   graph,
@@ -104,6 +105,6 @@ const makeGraph = graph => ({
 
 // const test = ['01111', '01101', '00011', '11110']; // 3
 // const test = ['1011', '0010']; //2
-const test = ['10111', '10101', '11101', '11111'];
-const graph = makeGraph(test);
+const test = ['10111', '10101', '11101', '11111']; // 2
+const graph = createGraph(test);
 console.log(graph.countHoles());

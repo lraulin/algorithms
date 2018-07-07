@@ -39,21 +39,87 @@
  * Output:"rumk,yes"
  */
 
-const matrix = "aaey, rrum, tgmn, ball";
-const inputDict = "all,ball,mur,raeymnl,tall,true,trum";
-const dict = inputDict.split(",");
+// this should be similar to bitmap-holes, except the search is like finding a
+// path through a maze...instead of simply marking all acceptable nodes, the
+// DFS has to backtrack if it's unable to find the word
 
-function findWordsUtil(matrix, visited, i, j, str) {
-  // Mark current cell as visited and append current character
-  // to string
-  visited[i][j] = true;
-  str = str + boggle[i][j];
+const createBoggle = (graph, wordList) => ({
+  // factory function to create a graph object with methods to find number of
+  // 'holes' (groups of adjacent '0's, where adjacent means above, below, left,
+  // or right) in a boolean 2d array represented as an array of strings
+  rows: graph.length,
+  columns: graph[0].length,
+  graph,
+  wordList,
+  isSafe(i, j, visited, letter) {
+    // return true if value at coords is specified letter and not yet visited
+    return (
+      i >= 0 &&
+      i < this.rows &&
+      j >= 0 &&
+      j < this.columns &&
+      // checking that location is in-bounds should be unnecessary in JS, as
+      // the value of an out-of-bounds array index is undefined, which is not
+      // equal to '0' (even using loose equality, undefined is equal only to
+      // itself and null, not other falsy value)
+      !visited[i][j] &&
+      this.graph[i][j] === letter
+    );
+  },
+  DFS(row, col, visited, word, index) {
+    // current location is valid; mark visited
+    visited[row][col] = true;
 
-  // If str is present in dictionary, then print it
-  if (dict.indexOf(str) !== -1) {
-    console.log("Found " + str);
+    // check if we're at the end of the word
+    if (index === word.length - 1) {
+      return true;
+    }
+
+    // get row and column numbers of 8 neighbors
+    const rowNum = [-1, -1, -1, 0, 0, 1, 1, 1];
+    const colNum = [-1, 0, 1, -1, 1, -1, 0, 1];
+
+    // recur for all neighbors
+    for (let k = 0; k < 8; k++) {
+      if (this.isSafe(row + rowNum[k], col + colNum[k], visited, word[index])) {
+        this.DFS(row + rowNum[k], col + colNum[k], visited, word, index);
+      }
+    }
+  },
+  checkWord(word) {
+    // initialize boolean 2d array to track visited nodes
+    const visited = [];
+    for (let i = 0; i < this.rows; i++) {
+      visited.push([]);
+      for (let j = 0; j < this.columns; j++) {
+        visited[i].push(false);
+      }
+    }
+
+    // traverse all values. when first letter is found, DFS for word
+    for (let i = 0; i < this.rows; i++) {
+      for (let j = 0; j < this.columns; j++) {
+        if (!visited[i][j] && this.graph[i][j] === word[0]) {
+          // start DFS with word index at 0
+          this.DFS(i, j, visited, word, 0);
+        }
+      }
+    }
+  },
+  checkWords() {
+    const foundWords = this.wordList.reduce(x => this.checkWord(x));
+    if (foundWords.length === this.wordList.length) {
+      return 'true';
+    } else if (!foundWords.length) {
+      return 'false';
+    } else {
+      return foundWords.join('');
+    }
   }
+});
 
-  // Traverse 8 adjacent cells of boggle[i][j]
-  for (let row = 1 - 1; row <= i + 1; i++) {}
-}
+const test = ['rbfg, ukop, fgub, mnry', 'bog,bop,gup,fur,ruk'];
+const graph = test[0].split(', ');
+const wordList = test[1].split(',');
+const boggle = createBoggle(graph, wordList);
+console.log(boggle.checkWord('bog'));
