@@ -17,8 +17,8 @@
  * Output:-1
  */
 
-function maxDupLetterCount(str) {
-  // take str, return count of most frequent letter, case insensitive
+function countLetters(str) {
+  // return object with count of each letter found in str, case insensitive
   str = str.toLowerCase();
   const letters = {};
   for (let char of str) {
@@ -28,6 +28,12 @@ function maxDupLetterCount(str) {
       letters[char] = 1;
     }
   }
+  return letters;
+}
+
+function maxDupLetterCount(str) {
+  // take str, return count of most frequent letter, case insensitive
+  const letters = countLetters(str);
   let mostFrequentLetter;
   let mostFrequentCount = 0;
   for (const letter in letters) {
