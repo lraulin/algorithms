@@ -21,11 +21,11 @@ function maxDupLetterCount(str) {
   // take str, return count of most frequent letter, case insensitive
   str = str.toLowerCase();
   const letters = {};
-  for (let i = 0; i < str.length; i++) {
-    if (letters.hasOwnProperty(str[i])) {
-      letters[str[i]]++;
+  for (let char of str) {
+    if (letters.hasOwnProperty(char)) {
+      letters[char]++;
     } else {
-      letters[str[i]] = 1;
+      letters[char] = 1;
     }
   }
   let mostFrequentLetter;
@@ -43,22 +43,14 @@ function letterCount(str) {
   // return first word in space-separated string with greatest number repeating
   // characters, or -1 if no words have repeating characters
   const arr = str.split(" ");
-  let mostFrequentWord;
-  let maxDupCount = 0;
-  for (let word of arr) {
-    const numDupLetters = maxDupLetterCount(word);
-    if (numDupLetters > maxDupCount) {
-      maxDupCount = numDupLetters;
-      mostFrequentWord = word;
-    }
-  }
-  if (maxDupCount > 1) {
-    return mostFrequentWord;
-  } else {
-    return -1;
-  }
+  const maxDupsWord = arr.reduce((accumulator, current) => {
+    return maxDupLetterCount(current) > maxDupLetterCount(accumulator)
+      ? current
+      : accumulator;
+  });
+  return maxDupLetterCount(maxDupsWord) > 1 ? maxDupsWord : -1;
 }
 
-// const test = "Hello apple pie";
-const test = "No words";
+const test = "Hello apple pie";
+// const test = "No words";
 console.log(letterCount(test));
