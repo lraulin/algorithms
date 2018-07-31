@@ -46,3 +46,11 @@
  * Output:"abaac" 
  */
 
+function AlphabetRunEncryption(str) {
+  let first = str[0]
+  let last
+  const segments = []
+  for (let i = 0; i < arr.length; i++) {
+    if (i > 0 && str.charCodeAt(i))
+  }
+}
