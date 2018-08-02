@@ -51,6 +51,8 @@ function comparePrecedence(a, b) {
 function djikstrasShuntingYard(str) {
   // Converted from pseudocode at
   // https://en.wikipedia.org/wiki/Shunting-yard_algorithm
+  str = str.replace(' ', '');
+  console.log(str);
   const outputQueue = [];
   const operatorStack = [];
   const rxNum = /^[0-9]+/g;
@@ -59,27 +61,22 @@ function djikstrasShuntingYard(str) {
   while (str.length) {
     // read a token
     let token;
-    // if token is a number
     if (rxNum.test(str)) {
       const index = rxNum.lastIndex;
       token = str.slice(0, index);
       str = str.slice(index);
+    } else if (rxOp.test(str)) {
+      token = str[0];
+      str = str.slice(1);
+    } else if (str[0] === ' ') {
+      continue;
+    } else {
+      console.log('Input error');
+    }
+    // if token is a number
+    if (!Numeber.isNaN(token)) {
       // push number token to output queue
       outputQueue.push(token);
-      // if token is an operator
-    } else if (rxOp.test(str)) {
-      // while there is an operator at the top of the stack with greater precidence
-      while (
-        comparePrecedence(operatorStack.top()) >= 0 &&
-        operatorStack.top() !== '('
-      ) {
-        // pop operators from the operator stack onto the output queue
-        outputQueue.push(operatorStack.pop());
-      }
-      // push token onto the operator stack
-      operatorStack.push(str[0]);
-      str = str.slice(1);
-      // if token is a left bracket
     } else if (str[0] === '(') {
       // push it onto the operator stack
       operatorStack.push(str[0]);
@@ -93,10 +90,22 @@ function djikstrasShuntingYard(str) {
         outputQueue.push(operatorStack.pop());
       }
       // pop the left bracket from the stack
+      // if token is a left bracket
       if (operatorStack.top() === '(') {
         operatorStack.pop();
+        // if token is an operator
       } else {
-        return 'Error: Mismatched parentheses';
+        // while there is an operator at the top of the stack with greater precidence
+        while (
+          operatorStack.top() !== '(' &&
+          comparePrecedence(operatorStack.top()) >= 0
+        ) {
+          // pop operators from the operator stack onto the output queue
+          outputQueue.push(operatorStack.pop());
+        }
+        // push token onto the operator stack
+        operatorStack.push(str[0]);
+        str = str.slice(1);
       }
     }
   }
@@ -157,5 +166,6 @@ function Calculator(str) {
 }
 
 // const test = '6*(4/2)+3*1';
-const test = '6/3-1';
+// const test = '6/3-1';
+const test = '3/4*2/(1-5)';
 console.log(Calculator(test));
