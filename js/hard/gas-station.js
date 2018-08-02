@@ -22,3 +22,24 @@
  * Input:"4","1:1","2:2","1:2","0:1"  Output:"impossible"
  * Input:"4","0:1","2:2","1:2","3:1"  Output:"4"
  */
+
+function GasStation(arr) {
+  arr = arr.slice(1);
+  outerLoop: for (let i = 0; i < arr.length; i++) {
+    let gas = 0;
+    for (let j = i; j <= arr.length + i - 1; j++) {
+      let currentStation = j >= arr.length ? j - arr.length : j;
+      const pair = arr[currentStation].split(':');
+      gas += Number(pair[0]) - Number(pair[1]);
+      if (gas < 0) {
+        continue outerLoop;
+      }
+    }
+    return i + 1;
+  }
+  return 'impossible';
+}
+
+// const test = ['4', '0:1', '2:2', '1:2', '3:1'];
+const test = ['4', '1:1', '2:2', '1:2', '0:1'];
+console.log(GasStation(test));
