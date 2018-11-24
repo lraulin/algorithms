@@ -24,17 +24,29 @@
  */
 
 function GasStation(arr) {
+  // remove N...is there a reason it was included?
   arr = arr.slice(1);
+  // try starting from each 'gas station'
   outerLoop: for (let i = 0; i < arr.length; i++) {
+    // initialize gas at 0
     let gas = 0;
+    // loop through each 'gas station' from starting position
     for (let j = i; j <= arr.length + i - 1; j++) {
+      // if we go out of bounds, wrap around from the beginning
       let currentStation = j >= arr.length ? j - arr.length : j;
+      // split the string on colon...first string is gas received,
+      // second is gas required to get to next station
       const pair = arr[currentStation].split(':');
+      // add gas from current station, subtract gas consumed getting to next station
       gas += Number(pair[0]) - Number(pair[1]);
+      // if we 'arrive' at the next station with less than zero gas,
+      // we didn't make it. try again starting from the next station.
       if (gas < 0) {
         continue outerLoop;
       }
     }
+    // we got through the loop without running out of gas
+    // return the index we started at, adding 1 to account for removing N
     return i + 1;
   }
   return 'impossible';
