@@ -1,0 +1,11 @@
+/Users/leeraulin/Projects/algorithms/csharp/ConsecutiveStrings/bin/Debug/netcoreapp2.1/ConsecutiveStrings.deps.json
+/Users/leeraulin/Projects/algorithms/csharp/ConsecutiveStrings/bin/Debug/netcoreapp2.1/ConsecutiveStrings.runtimeconfig.json
+/Users/leeraulin/Projects/algorithms/csharp/ConsecutiveStrings/bin/Debug/netcoreapp2.1/ConsecutiveStrings.runtimeconfig.dev.json
+/Users/leeraulin/Projects/algorithms/csharp/ConsecutiveStrings/bin/Debug/netcoreapp2.1/ConsecutiveStrings.dll
+/Users/leeraulin/Projects/algorithms/csharp/ConsecutiveStrings/bin/Debug/netcoreapp2.1/ConsecutiveStrings.pdb
+/Users/leeraulin/Projects/algorithms/csharp/ConsecutiveStrings/obj/Debug/netcoreapp2.1/ConsecutiveStrings.csprojAssemblyReference.cache
+/Users/leeraulin/Projects/algorithms/csharp/ConsecutiveStrings/obj/Debug/netcoreapp2.1/ConsecutiveStrings.csproj.CoreCompileInputs.cache
+/Users/leeraulin/Projects/algorithms/csharp/ConsecutiveStrings/obj/Debug/netcoreapp2.1/ConsecutiveStrings.AssemblyInfoInputs.cache
+/Users/leeraulin/Projects/algorithms/csharp/ConsecutiveStrings/obj/Debug/netcoreapp2.1/ConsecutiveStrings.AssemblyInfo.cs
+/Users/leeraulin/Projects/algorithms/csharp/ConsecutiveStrings/obj/Debug/netcoreapp2.1/ConsecutiveStrings.dll
+/Users/leeraulin/Projects/algorithms/csharp/ConsecutiveStrings/obj/Debug/netcoreapp2.1/ConsecutiveStrings.pdb
