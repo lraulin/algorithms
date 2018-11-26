@@ -6,11 +6,13 @@ namespace CamelCase
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("camel case".CamelCase());
+            Console.WriteLine("".CamelCase());
+            Console.WriteLine("Done");
         }
 
         public static string CamelCase(this string str)
         {
+            if (str == "") return "";
             string[] arr = str.Split(' ');
             for (int i = 0; i < arr.Length; i++)
             {
